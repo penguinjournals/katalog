@@ -15,3 +15,14 @@ Como mucho, te puede resultar cómodo llamar a la clase desde un test junit, par
 Hacer una clase MailLog que, tras añadir lineas con addLine, si llamas a persist() lo que hace es enviar esas lineas por mail.
 
 Tienes prohibido extender clases, implementar interfaes o whatevers ... lo único que puedes hacer es copipastear código de lo que has hecho hasta ahora. Ni más...  ¡ni menos!  :-)
+
+**Ejercicio 3:** (13-7-2011)
+
+Ahora quiero que crees una branch de git.
+Esa branch se llamará "clase abstracta".
+
+Como habrás comprobado, ambas clases comparten código... lo que quiero que hagas es que el código común esté en la clase abstracta, y el código diferente, extienda a esas clases.
+
+Concretamente, habrá una clase abstracta Log, y dos clases que le extienden: FileLog, y MailLog.
+
+Primera pregunta: ¿qué es una clase abstracta?  :-)
