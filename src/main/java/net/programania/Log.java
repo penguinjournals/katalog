@@ -1,13 +1,18 @@
 package net.programania;
 
-/**
- * Hello world!
- *
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class Log 
-{
-    public static void main( String[] args )
+{   
+	List<String> logBuffer = new ArrayList<String>();
+    public void add( String line )
     {
-        System.out.println( "Hello World!" );
+    	logBuffer.add(line);
     }
+	public void persist() {
+		for (int line = 0; line < logBuffer.size(); line++) {
+			System.out.println(logBuffer.get(line));
+		}
+	}
 }

@@ -1,5 +1,5 @@
 # katalog
-**Ejercicio 1:**
+**Ejercicio 1:** (30-6-2011)
 
 Constrúyeme en java una clase Log con un método add que añade lineas al log y un método persist que escribe en un fichero las lineas.
 
