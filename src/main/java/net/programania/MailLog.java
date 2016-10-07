@@ -1,22 +1,15 @@
 package net.programania;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;	
 
-public class MailLog 
+public class MailLog extends Log
 {   
 	private final Properties properties = new Properties();
 	private Session session;
-	List<String> logBuffer = new ArrayList<String>();
 	
-    public void addLine( String line )
-    {
-    	logBuffer.add(line);
-    }
 	public void persist() {
 		String body = new String();
 		for (int line = 0; line < logBuffer.size(); line++) {

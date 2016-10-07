@@ -7,7 +7,7 @@ public class LogTest
 {
 	public void testLog()
     {
-    	Log log = new Log();
+    	FileLog log = new FileLog();
     	log.addLine("boniclo");
     	log.addLine("piticli");
     	log.persist();
