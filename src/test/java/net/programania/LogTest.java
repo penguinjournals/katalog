@@ -5,11 +5,19 @@ import junit.framework.TestCase;
 public class LogTest 
     extends TestCase
 {
-	public void testAddLine()
+	public void testLog()
     {
     	Log log = new Log();
-    	log.add("boniclo");
-    	log.add("piticli");
+    	log.addLine("boniclo");
+    	log.addLine("piticli");
     	log.persist();
     }
+	
+	public void testMailLog()
+    {
+    	MailLog log = new MailLog();
+    	log.addLine("boniclo");
+    	log.addLine("piticli");
+    	log.persist();
+    }	
 }

@@ -10,7 +10,7 @@ public class Log
 	List<String> logBuffer = new ArrayList<String>();
 	private static final String FILENAME = "output.log";
 	
-    public void add( String line )
+    public void addLine( String line )
     {
     	logBuffer.add(line);
     }
