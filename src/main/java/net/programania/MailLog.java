@@ -1,26 +1,29 @@
 package net.programania;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;	
 
-public class MailLog 
+class MailLog
 {   
 	private final Properties properties = new Properties();
 	private Session session;
-	List<String> logBuffer = new ArrayList<String>();
+	private List<String> logBuffer = new ArrayList<String>();
 	
-    public void addLine( String line )
+    void addLine(String line)
     {
     	logBuffer.add(line);
     }
-	public void persist() {
-		String body = new String();
-		for (int line = 0; line < logBuffer.size(); line++) {
-			body = body+(logBuffer.get(line) + "\n");
+	void persist() {
+		String body = "";
+		for (String aLogBuffer : logBuffer) {
+			body = body + (aLogBuffer + "\n");
 		}
 		System.out.println(body);
 		sendEmail(body);
@@ -42,7 +45,7 @@ public class MailLog
 		session = Session.getDefaultInstance(properties);
 	}
  
-	public void sendEmail(String body){
+	private void sendEmail(String body){
  
 		setupEmail();
 		try{

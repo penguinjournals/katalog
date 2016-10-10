@@ -5,20 +5,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Log 
+class Log
 {   
-	List<String> logBuffer = new ArrayList<String>();
+	private List<String> logBuffer = new ArrayList<>();
 	private static final String FILENAME = "output.log";
 	
-    public void addLine( String line )
+    void addLine(String line)
     {
     	logBuffer.add(line);
     }
-	public void persist() {
+	void persist() {
 		try {
 			FileWriter file = new FileWriter(FILENAME, true);
-			for (int line = 0; line < logBuffer.size(); line++) {
-				file.write(logBuffer.get(line) + "\n");
+			for (String aLogBuffer : logBuffer) {
+				file.write(aLogBuffer + "\n");
 			}
 			file.close();
 		} catch (IOException e) {
