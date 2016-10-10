@@ -30,15 +30,13 @@ Primera pregunta: ¿qué es una clase abstracta?  :-)
 **Ejercicio 4:** (18-7-2011)
 
 1. Resumen:
-..- has desarrollado una clase que loguea en el filesystem.
-..- has desarrollado otra clase que loguea por email
-..- tras hacerlo, has detectado duplicidad de código. Para eliminarla, has decidido utilizar un patrón Template (míratelo!) que consiste en crear una plantilla (una clase abstracta) de la cuál sus hijas "rellenan" la parte de la plantilla vacía (método persist).
-
+    * has desarrollado una clase que loguea en el filesystem.
+    * has desarrollado otra clase que loguea por email
+    * tras hacerlo, has detectado duplicidad de código. Para eliminarla, has decidido utilizar un patrón Template (míratelo!) que consiste en crear una plantilla (una clase abstracta) de la cuál sus hijas "rellenan" la parte de la plantilla vacía (método persist).
 2. Primera parte:
-..- quiero que cubras de tests tu código. Preguntas:
-..- ¿qué tipo de tests serán? ¿unitarios? ¿integración? ¿funcionales?
-..- quiero un 100% de cobertura --> ¿cómo se obtiene con java-eclipse el % de cobertura?
-
+    * quiero que cubras de tests tu código. Preguntas:
+    * ¿qué tipo de tests serán? ¿unitarios? ¿integración? ¿funcionales?
+    * quiero un 100% de cobertura --> ¿cómo se obtiene con java-eclipse el % de cobertura?
 3. Segunda parte:
-..- acto seguido quiero que crees una nueva branch llamada "inyección de dependencias". Pero NO como branch de la "clase abstracta" sino como branch de nuestra primera implementación monolítica.
-..- quiero que elimines la duplicidad pero, esta vez, en lugar de con un patrón template, utilizando una clase común a la que inyectarás por constructor dos posibles drivers: FileDriver y MailDriver ... 
+    * acto seguido quiero que crees una nueva branch llamada "inyección de dependencias". Pero NO como branch de la "clase abstracta" sino como branch de nuestra primera implementación monolítica.
+    * quiero que elimines la duplicidad pero, esta vez, en lugar de con un patrón template, utilizando una clase común a la que inyectarás por constructor dos posibles drivers: FileDriver y MailDriver ... 
