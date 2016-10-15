@@ -8,23 +8,15 @@ import java.util.List;
 class Log
 {   
 	private List<String> logBuffer = new ArrayList<>();
-	private static final String FILENAME = "output.log";
 	
     void addLine(String line)
     {
     	logBuffer.add(line);
     }
 	void persist() {
-		try {
-			FileWriter file = new FileWriter(FILENAME, true);
-			for (String aLogBuffer : logBuffer) {
-				file.write(aLogBuffer + "\n");
-			}
-			file.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Couldn't write to file");
-			e.printStackTrace();
-		}
+		LogFileWriter logFileWriter = new LogFileWriter();
+		logFileWriter.persist(logBuffer);
+		LogMailWriter logMailWriter = new LogMailWriter();
+		logMailWriter.persist(logBuffer);
 	}
 }
