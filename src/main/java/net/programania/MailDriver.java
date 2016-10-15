@@ -6,16 +6,15 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class LogMailWriter
+public class MailDriver implements LogDriver
 {   
 	private final Properties properties = new Properties();
 	private Session session;
 
-	void persist(List<String> logBuffer) {
+	public void persist(List<String> logBuffer) {
 		String body = "";
 		for (String aLogBuffer : logBuffer) {
 			body = body + (aLogBuffer + "\n");
