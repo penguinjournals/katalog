@@ -9,7 +9,7 @@ public class LogTest
 {
 	public void testLog() throws IOException
     {
-		FileDriver logDriver = null;
+		FileDriver logDriver = new FileDriver();
     	Log log = new Log(logDriver);
     	log.addLine("boniclo");
     	log.persist();

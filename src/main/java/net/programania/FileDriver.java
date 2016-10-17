@@ -9,9 +9,6 @@ public class FileDriver implements LogDriver{
 	private static final String FILENAME = "output.log";
 
 	public void persist(List<String> logBuffer) {
-		for (String aLogBuffer : logBuffer) {
-			System.out.println(aLogBuffer);
-		}
 		try {
 			FileWriter file = new FileWriter(FILENAME, true);
 			for (String aLogBuffer : logBuffer) {
