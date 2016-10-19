@@ -9,18 +9,12 @@ public class LogTest
 {
 	public void testLog() throws IOException
     {
-		FileDriver logDriver = new FileDriver();
+		InMemoryDriver logDriver = new InMemoryDriver();
     	Log log = new Log(logDriver);
-    	log.addLine("boniclo");
+    	String expectedLog = "boniclo";
+    	log.addLine(expectedLog);
     	log.persist();
+    	String getLog = log.retrieveLog();
+    	assertEquals(expectedLog, getLog);
     }
-	/*
-	public void testMailLog()
-    {
-    	MailDriver logDriver = null;
-    	Log log = new Log(logDriver);
-    	log.addLine("boniclo");
-    	log.persist();
-    }
-    */
 }

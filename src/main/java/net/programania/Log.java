@@ -19,4 +19,7 @@ class Log
 	void persist() {
 		logDriver.persist(logBuffer);
 	}
+	public String retrieveLog(){
+		return logDriver.retrieveLog(logBuffer);
+	}
 }
