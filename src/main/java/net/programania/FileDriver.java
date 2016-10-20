@@ -21,10 +21,4 @@ public class FileDriver implements LogDriver{
 			e.printStackTrace();
 		}		
 	}
-
-	@Override
-	public String retrieveLog(List<String> logBuffer) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
