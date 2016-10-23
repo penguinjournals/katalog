@@ -40,3 +40,9 @@ Primera pregunta: ¿qué es una clase abstracta?  :-)
 3. Segunda parte:
     * acto seguido quiero que crees una nueva branch llamada "inyección de dependencias". Pero NO como branch de la "clase abstracta" sino como branch de nuestra primera implementación monolítica.
     * quiero que elimines la duplicidad pero, esta vez, en lugar de con un patrón template, utilizando una clase común a la que inyectarás por constructor dos posibles drivers: FileDriver y MailDriver ... 
+
+**Ejercicio 5:** (20-10-2016)
+
+Hemos tenido que crear un método retrieveLog para saber que persist había sido llamado. Es un truco. La alternativa sería "espiar" el persist y saber "si ha sido llamado"...
+
+Usa un framework de mocking (como mockito) para saber si persist del logdriver ha sido llamado...
