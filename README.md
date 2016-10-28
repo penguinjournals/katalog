@@ -46,3 +46,12 @@ Primera pregunta: ¿qué es una clase abstracta?  :-)
 Hemos tenido que crear un método retrieveLog para saber que persist había sido llamado. Es un truco. La alternativa sería "espiar" el persist y saber "si ha sido llamado"...
 
 Usa un framework de mocking (como mockito) para saber si persist del logdriver ha sido llamado...
+
+# katabot
+
+**primeros pasos:**
+
+1. levanta un proyecto con javen y jgit
+2. con jgit haz que se haga un git log (del propio repo de desarrollo, podemos usar el que tenemos ya con la kata log) y y se parsee alguna chorrada de ese log....
+
+No hagas TDD! Estamos explorando el problema! #spikeRápido

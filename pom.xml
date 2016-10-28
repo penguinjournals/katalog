@@ -21,7 +21,6 @@
       </plugin>
     </plugins>
   </build>
-
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -38,6 +37,21 @@
 	    <groupId>javax.mail</groupId>
 	    <artifactId>mail</artifactId>
 	    <version>1.4</version>
-	</dependency>    
+	</dependency>
+	<dependency>
+	    <groupId>org.slf4j</groupId>
+	    <artifactId>slf4j-api</artifactId>
+	    <version>1.7.5</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.slf4j</groupId>
+	    <artifactId>slf4j-log4j12</artifactId>
+	    <version>1.7.5</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.eclipse.jgit</groupId>
+	    <artifactId>org.eclipse.jgit</artifactId>
+	    <version>4.5.0.201609210915-r</version>
+	</dependency>	    
   </dependencies>
 </project>
