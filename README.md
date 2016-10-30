@@ -55,3 +55,28 @@ Usa un framework de mocking (como mockito) para saber si persist del logdriver h
 2. con jgit haz que se haga un git log (del propio repo de desarrollo, podemos usar el que tenemos ya con la kata log) y y se parsee alguna chorrada de ese log....
 
 No hagas TDD! Estamos explorando el problema! #spikeRápido
+
+**siguiente iteración**
+
+Siguiente paso: ¿serías capaz de hacer un proceso que **crea** un repositorio git y lo deja en "cierto estado" que nos venga bien para testear? No sé cómo difícil será.....
+
+Imagínate este test:
+- givenAgitRepoEnCiertoEstado  <<--- poder generar repos en cierto estado....
+- whenPidoElNumeroDeReleases
+- thenMeDevuelve3
+
+lo ves posible?
+
+**siguiente iteración**
+
+¿Cuál sería el caso más sencillo a testear?
+
+- tu primera labor sería crear un repo en un estado básico
+- lanzar nuestra lógica de negocio en el caso más sencillo posible
+- y asertar que todo ha ido guay...
+
+Aproximación:
+
+El objetivo base es sacar la lista de commits entre dos hashes (head de rama máster y head de rama develop).
+Así que lo básico obtener desde un repo lista de commits entre dos hashes ¿si? 
+Crear repo, meter X commits, coger lista assertar que los mensajes están ok ¿si?
