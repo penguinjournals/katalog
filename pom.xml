@@ -52,6 +52,6 @@
 	    <groupId>org.eclipse.jgit</groupId>
 	    <artifactId>org.eclipse.jgit</artifactId>
 	    <version>4.5.0.201609210915-r</version>
-	</dependency>	    
+	</dependency>  
   </dependencies>
 </project>

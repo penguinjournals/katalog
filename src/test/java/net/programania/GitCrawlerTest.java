@@ -10,21 +10,38 @@ import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.api.errors.NoFilepatternException;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.junit.Test;
+import org.mockito.internal.util.collections.Iterables;
 
 public class GitCrawlerTest {
-
+	/**
+	 * Que tiene que hacer la clase:
+	 * Dado un repo tiene que sacar el commit log entre la rama master y la rama develop.
+	 * 1º obtener el hash del latest commit de la rama master
+	 * 2º obtener el hash del latest commit de la rama develop
+	 * 3º obtener el commit log entre esos dos hashes
+	 */
+	
 	@Test
-	public void test() throws IllegalStateException, IOException, GitAPIException {
+	public void testCommitMessage() throws IllegalStateException, IOException, GitAPIException {
 		Git fakeRepo = initializeRepo();
-		String fakeMessage = "cocotero";
-		insertCommitMessage(fakeRepo, fakeMessage);
-		GitCrawler gitCrawler = new GitCrawler(fakeRepo.getRepository().getDirectory().getParent());
-		Iterable<RevCommit> commitLog = gitCrawler.getCommitLog();
-		for (RevCommit commitMessage : commitLog) {
-			assertEquals(fakeMessage, commitMessage.getFullMessage());
+		int fakeCommitAmount = 8;
+		for (int dummyFileNumber = 1; dummyFileNumber <= fakeCommitAmount; dummyFileNumber++) {
+			String fakeMessage = "release_1_commit_"+String.valueOf(dummyFileNumber);
+			insertCommitMessage(fakeRepo, fakeMessage);	
 		}
+		fakeRepo.branchCreate().setName("develop").call();
+		fakeRepo.checkout().setName("develop").call();
+		for (int dummyFileNumber = 1; dummyFileNumber <= fakeCommitAmount; dummyFileNumber++) {
+			String fakeMessage = "release_2_commit_"+String.valueOf(dummyFileNumber);
+			insertCommitMessage(fakeRepo, fakeMessage);	
+		}
+		GitCrawler gitCrawler = new GitCrawler(fakeRepo.getRepository().getDirectory().getParent());
+		System.out.println("Commits en master");
+		gitCrawler.latestCommitOnBranch("master");
+		System.out.println("Commits en develop");
+		gitCrawler.latestCommitOnBranch("develop");
 	}
-
+	
 	private void insertCommitMessage(Git git, String commitMessage) throws IOException, NoFilepatternException, GitAPIException {
         git.commit().setMessage(commitMessage).call();
 	}
@@ -35,6 +52,7 @@ public class GitCrawlerTest {
 		    throw new IOException("Could not delete file " + dir);
 		}
 		try (Git git = Git.init().setDirectory(dir).call()) {
+			System.out.println(dir);
 			return git;
 		}
 	}
