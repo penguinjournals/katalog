@@ -36,10 +36,8 @@ public class GitCrawlerTest {
 			insertCommitMessage(fakeRepo, fakeMessage);	
 		}
 		GitCrawler gitCrawler = new GitCrawler(fakeRepo.getRepository().getDirectory().getParent());
-		System.out.println("Commits en master");
-		gitCrawler.latestCommitOnBranch("master");
-		System.out.println("Commits en develop");
-		gitCrawler.latestCommitOnBranch("develop");
+		String latestCommitOnMaster = gitCrawler.latestCommitOnBranch("master");
+		String latestCommitOnDevelop = gitCrawler.latestCommitOnBranch("develop");
 	}
 	
 	private void insertCommitMessage(Git git, String commitMessage) throws IOException, NoFilepatternException, GitAPIException {

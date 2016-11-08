@@ -39,14 +39,11 @@ public class GitCrawler {
 		}
 	}
 
-	public void latestCommitOnBranch(String branchName) throws RevisionSyntaxException, NoHeadException, MissingObjectException, IncorrectObjectTypeException, AmbiguousObjectException, GitAPIException, IOException {
+	public String latestCommitOnBranch(String branchName) throws RevisionSyntaxException, NoHeadException, MissingObjectException, IncorrectObjectTypeException, AmbiguousObjectException, GitAPIException, IOException {
         Iterable<RevCommit> commits = git.log().add(git.getRepository().resolve(branchName)).call();
         RevCommit latestCommit = null;
         latestCommit = commits.iterator().next();
-        System.out.println(latestCommit.getName());
-        System.out.println(latestCommit.getAuthorIdent().getName());
-        System.out.println(new Date(latestCommit.getCommitTime() * 1000L));
-        System.out.println(latestCommit.getFullMessage());
+		return latestCommit.getName();
 	}
 
 }
