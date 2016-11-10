@@ -2,6 +2,7 @@ package net.programania;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
 import java.io.File;
 import java.io.IOException;
 
@@ -35,9 +36,11 @@ public class GitCrawlerTest {
 			String fakeMessage = "release_2_commit_"+String.valueOf(dummyFileNumber);
 			insertCommitMessage(fakeRepo, fakeMessage);	
 		}
-		GitCrawler gitCrawler = new GitCrawler(fakeRepo.getRepository().getDirectory().getParent());
-		String latestCommitOnMaster = gitCrawler.latestCommitOnBranch("master");
-		String latestCommitOnDevelop = gitCrawler.latestCommitOnBranch("develop");
+		// Begin of testing
+		String repoPath = fakeRepo.getRepository().getDirectory().getParent();
+		GitCrawler repoUnderTesting = new GitCrawler(repoPath);
+		List<String> changelogBetweenMasterAndDevelop = repoUnderTesting.changelogBetweenTwoBranches("master", "develop");
+		assertEquals(changelogBetweenMasterAndDevelop.size(), fakeCommitAmount);
 	}
 	
 	private void insertCommitMessage(Git git, String commitMessage) throws IOException, NoFilepatternException, GitAPIException {
