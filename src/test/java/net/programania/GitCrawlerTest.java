@@ -26,7 +26,7 @@ public class GitCrawlerTest {
 		generateFakeCommits(fakeRepo, fakeCommitAmount);
 		// Begin of testing
 		GitCrawler repoUnderTesting = new GitCrawler(repoPath);
-		List<String> changelogBetweenMasterAndDevelop = repoUnderTesting.changelogBetweenTwoBranches("master", "develop");
+		List<gitChange> changelogBetweenMasterAndDevelop = repoUnderTesting.changelogBetweenTwoBranches("master", "develop");
 		assertEquals(changelogBetweenMasterAndDevelop.size(), fakeCommitAmount);
 	}
 

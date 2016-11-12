@@ -17,7 +17,7 @@ import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
-public class GitCrawler {
+public class GitCrawler{
 	private Git git;
 	
 	public GitCrawler(String pathToRepository) throws IOException {
@@ -35,9 +35,9 @@ public class GitCrawler {
 		return latestCommit.getName();
 	}
 
-	public List<String> changelogBetweenTwoBranches(String branchA, String branchB) throws RevisionSyntaxException, NoHeadException, MissingObjectException, IncorrectObjectTypeException, AmbiguousObjectException, GitAPIException, IOException {
+	public List<gitChange> changelogBetweenTwoBranches(String branchA, String branchB) throws RevisionSyntaxException, NoHeadException, MissingObjectException, IncorrectObjectTypeException, AmbiguousObjectException, GitAPIException, IOException {
 		// TODO Auto-generated method stub
-		List<String> changelog = new ArrayList<String>();
+		List<gitChange> changelog = new ArrayList<gitChange>();
 		String latestCommitHashOnBranchA = latestCommitHashOnBranch(branchA);
 		String latestCommitHashOnBranchB = latestCommitHashOnBranch(branchB);
 		try (RevWalk walk = new RevWalk(git.getRepository())) {
@@ -46,8 +46,9 @@ public class GitCrawler {
 			for(RevCommit rev: walk){
 				if(rev.getId().getName().equals(latestCommitHashOnBranchA)){
 					break;
-				}				
-				changelog.add(rev.getFullMessage());
+				}
+				gitChange currentChange = new gitChange(rev.name(), rev.getFullMessage());
+				changelog.add(currentChange);
 			}
 			walk.dispose();
 		}
