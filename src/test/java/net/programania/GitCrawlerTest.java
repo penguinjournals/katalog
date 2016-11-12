@@ -33,13 +33,13 @@ public class GitCrawlerTest {
 	private void generateFakeCommits(Git fakeRepo, int fakeCommitAmount) throws IOException, NoFilepatternException, GitAPIException,
 			RefAlreadyExistsException, RefNotFoundException, InvalidRefNameException, CheckoutConflictException {
 		for (int dummyFileNumber = 1; dummyFileNumber <= fakeCommitAmount; dummyFileNumber++) {
-			String fakeMessage = "release_1_commit_"+String.valueOf(dummyFileNumber);
+			String fakeMessage = "[SC-000"+String.valueOf(dummyFileNumber)+"]release_1_commit_"+String.valueOf(dummyFileNumber);
 			insertCommitMessage(fakeRepo, fakeMessage);	
 		}
 		fakeRepo.branchCreate().setName("develop").call();
 		fakeRepo.checkout().setName("develop").call();
 		for (int dummyFileNumber = 1; dummyFileNumber <= fakeCommitAmount; dummyFileNumber++) {
-			String fakeMessage = "release_2_commit_"+String.valueOf(dummyFileNumber);
+			String fakeMessage = "[SC-001"+String.valueOf(dummyFileNumber)+"]release_2_commit_"+String.valueOf(dummyFileNumber);
 			insertCommitMessage(fakeRepo, fakeMessage);	
 		}
 	}
