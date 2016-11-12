@@ -7,25 +7,31 @@ import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.errors.CheckoutConflictException;
 import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.api.errors.InvalidRefNameException;
 import org.eclipse.jgit.api.errors.NoFilepatternException;
-import org.eclipse.jgit.revwalk.RevCommit;
+import org.eclipse.jgit.api.errors.RefAlreadyExistsException;
+import org.eclipse.jgit.api.errors.RefNotFoundException;
 import org.junit.Test;
-import org.mockito.internal.util.collections.Iterables;
 
 public class GitCrawlerTest {
-	/**
-	 * Que tiene que hacer la clase:
-	 * Dado un repo tiene que sacar el commit log entre la rama master y la rama develop.
-	 * 1º obtener el hash del latest commit de la rama master
-	 * 2º obtener el hash del latest commit de la rama develop
-	 * 3º obtener el commit log entre esos dos hashes
-	 */
 	
 	@Test
 	public void testCommitMessage() throws IllegalStateException, IOException, GitAPIException {
+		// Bootstrap fake repo
 		Git fakeRepo = initializeRepo();
+		String repoPath = fakeRepo.getRepository().getDirectory().getParent();
 		int fakeCommitAmount = 8;
+		generateFakeCommits(fakeRepo, fakeCommitAmount);
+		// Begin of testing
+		GitCrawler repoUnderTesting = new GitCrawler(repoPath);
+		List<String> changelogBetweenMasterAndDevelop = repoUnderTesting.changelogBetweenTwoBranches("master", "develop");
+		assertEquals(changelogBetweenMasterAndDevelop.size(), fakeCommitAmount);
+	}
+
+	private void generateFakeCommits(Git fakeRepo, int fakeCommitAmount) throws IOException, NoFilepatternException, GitAPIException,
+			RefAlreadyExistsException, RefNotFoundException, InvalidRefNameException, CheckoutConflictException {
 		for (int dummyFileNumber = 1; dummyFileNumber <= fakeCommitAmount; dummyFileNumber++) {
 			String fakeMessage = "release_1_commit_"+String.valueOf(dummyFileNumber);
 			insertCommitMessage(fakeRepo, fakeMessage);	
@@ -36,11 +42,6 @@ public class GitCrawlerTest {
 			String fakeMessage = "release_2_commit_"+String.valueOf(dummyFileNumber);
 			insertCommitMessage(fakeRepo, fakeMessage);	
 		}
-		// Begin of testing
-		String repoPath = fakeRepo.getRepository().getDirectory().getParent();
-		GitCrawler repoUnderTesting = new GitCrawler(repoPath);
-		List<String> changelogBetweenMasterAndDevelop = repoUnderTesting.changelogBetweenTwoBranches("master", "develop");
-		assertEquals(changelogBetweenMasterAndDevelop.size(), fakeCommitAmount);
 	}
 	
 	private void insertCommitMessage(Git git, String commitMessage) throws IOException, NoFilepatternException, GitAPIException {
