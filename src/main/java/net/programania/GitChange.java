@@ -1,10 +1,10 @@
 package net.programania;
 
-public class gitChange{
+public class GitChange{
 	private String uniqueIdentifier;
 	private String message;
 	
-	public gitChange(String uniqueIdentifier, String message){
+	public GitChange(String uniqueIdentifier, String message){
 		this.uniqueIdentifier = uniqueIdentifier;
 		this.message = message;
 	}

@@ -35,9 +35,9 @@ public class GitCrawler{
 		return latestCommit.getName();
 	}
 
-	public List<gitChange> changelogBetweenTwoBranches(String branchA, String branchB) throws RevisionSyntaxException, NoHeadException, MissingObjectException, IncorrectObjectTypeException, AmbiguousObjectException, GitAPIException, IOException {
+	public List<GitChange> changelogBetweenTwoBranches(String branchA, String branchB) throws RevisionSyntaxException, NoHeadException, MissingObjectException, IncorrectObjectTypeException, AmbiguousObjectException, GitAPIException, IOException {
 		// TODO Auto-generated method stub
-		List<gitChange> changelog = new ArrayList<gitChange>();
+		List<GitChange> changelog = new ArrayList<GitChange>();
 		String latestCommitHashOnBranchA = latestCommitHashOnBranch(branchA);
 		String latestCommitHashOnBranchB = latestCommitHashOnBranch(branchB);
 		try (RevWalk walk = new RevWalk(git.getRepository())) {
@@ -47,7 +47,7 @@ public class GitCrawler{
 				if(rev.getId().getName().equals(latestCommitHashOnBranchA)){
 					break;
 				}
-				gitChange currentChange = new gitChange(rev.name(), rev.getFullMessage());
+				GitChange currentChange = new GitChange(rev.name(), rev.getFullMessage());
 				changelog.add(currentChange);
 			}
 			walk.dispose();

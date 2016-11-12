@@ -5,3 +5,9 @@ target
 .classpath
 .project
 .settings/
+.gradle
+build/
+gradle-app.setting
+!gradle-wrapper.jar
+.gradletasknamecache
+/bin/
