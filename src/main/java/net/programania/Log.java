@@ -7,7 +7,7 @@ class Log {
   private List<String> logBuffer = new ArrayList<>();
   private LogDriver logDriver;
 
-  public Log(LogDriver logDriver) {
+  Log(LogDriver logDriver) {
     this.logDriver = logDriver;
   }
 

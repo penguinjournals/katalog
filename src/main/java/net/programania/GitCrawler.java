@@ -1,10 +1,5 @@
 package net.programania;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.api.errors.NoHeadException;
@@ -17,15 +12,22 @@ import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
-public class GitCrawler{
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+class GitCrawler{
 	private Git git;
 	
-	public GitCrawler(String pathToRepository) throws IOException {
+	GitCrawler(String pathToRepository) {
 		FileRepositoryBuilder builder = new FileRepositoryBuilder();
 		File repoDir = new File(pathToRepository+"/.git");
 		try (Repository repository = builder.setGitDir(repoDir).readEnvironment().findGitDir().build()) {
             git = new Git(repository);
-		}		
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	private String latestCommitHashOnBranch(String branchName) throws RevisionSyntaxException, NoHeadException, MissingObjectException, IncorrectObjectTypeException, AmbiguousObjectException, GitAPIException, IOException {
@@ -35,8 +37,7 @@ public class GitCrawler{
 		return latestCommit.getName();
 	}
 
-	public List<GitChange> changelogBetweenTwoBranches(String branchA, String branchB) throws RevisionSyntaxException, NoHeadException, MissingObjectException, IncorrectObjectTypeException, AmbiguousObjectException, GitAPIException, IOException {
-		// TODO Auto-generated method stub
+	List<GitChange> changelogBetweenTwoBranches(String branchA, String branchB) throws RevisionSyntaxException, NoHeadException, MissingObjectException, IncorrectObjectTypeException, AmbiguousObjectException, GitAPIException, IOException {
 		List<GitChange> changelog = new ArrayList<GitChange>();
 		String latestCommitHashOnBranchA = latestCommitHashOnBranch(branchA);
 		String latestCommitHashOnBranchB = latestCommitHashOnBranch(branchB);
