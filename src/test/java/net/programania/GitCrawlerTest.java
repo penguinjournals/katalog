@@ -24,7 +24,9 @@ public class GitCrawlerTest {
             GitCrawlerHelper.MASTER,
             GitCrawlerHelper.DEVELOP
     );
-
+    for (GitChange gitChange : changelogBetweenMasterAndDevelop) {
+		gitChange.extractJiraTickets();
+	}
     //THEN
     assertEquals(changelogBetweenMasterAndDevelop.size(), FAKE_COMMIT_AMOUNT);
   }

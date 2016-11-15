@@ -1,5 +1,9 @@
 package net.programania;
 
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 class GitChange{
 	private String uniqueIdentifier;
 	private String message;
@@ -15,6 +19,16 @@ class GitChange{
 
 	public String changeMessage() {
 		return message;
+	}
+	
+	public void extractJiraTickets() {
+		String jiraTicketRegexp = "\\[SC-\\d{1,5}\\]";
+		Pattern pattern = Pattern.compile(jiraTicketRegexp);
+		Matcher jiraTickets = pattern.matcher(message);
+		
+		while (jiraTickets.find()) {	
+			System.out.println(jiraTickets.group());	
+		}
 	}
 
 }
