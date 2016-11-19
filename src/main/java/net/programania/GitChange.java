@@ -1,5 +1,6 @@
 package net.programania;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -7,10 +8,12 @@ import java.util.regex.Pattern;
 class GitChange{
 	private String uniqueIdentifier;
 	private String message;
+	private List<String> foundTickets = new ArrayList<String>();
 	
 	GitChange(String uniqueIdentifier, String message){
 		this.uniqueIdentifier = uniqueIdentifier;
 		this.message = message;
+		extractJiraTickets();
 	}
 
 	public String changeUniqueIdentifier() {
@@ -21,13 +24,20 @@ class GitChange{
 		return message;
 	}
 	
-	public void extractJiraTickets() {
+	private void extractJiraTickets() {
 		String jiraTicketRegexp = "\\[SC-\\d{1,5}\\]";
 		Pattern pattern = Pattern.compile(jiraTicketRegexp);
 		Matcher jiraTickets = pattern.matcher(message);
 		
 		while (jiraTickets.find()) {	
-			System.out.println(jiraTickets.group());	
+			foundTickets.add(jiraTickets.group());
+		}
+	}
+
+	public void printJiraTickets() {
+		// TODO Auto-generated method stub
+		for (String ticket : foundTickets) {
+			System.out.println(ticket);
 		}
 	}
 

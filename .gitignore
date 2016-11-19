@@ -11,3 +11,4 @@ gradle-app.setting
 !gradle-wrapper.jar
 .gradletasknamecache
 /bin/
+config.properties
