@@ -21,13 +21,13 @@ class GitCrawlerHelper {
 
   void generateFakeCommits(int fakeCommitAmount) throws IOException, GitAPIException {
     for (int dummyFileNumber = 1; dummyFileNumber <= fakeCommitAmount; dummyFileNumber++) {
-      String fakeMessage = "[SC-000" + String.valueOf(dummyFileNumber) + "]release_1_commit_" + String.valueOf(dummyFileNumber);
+      String fakeMessage = "[SC-1000" + String.valueOf(dummyFileNumber) + "]release_1_commit_" + String.valueOf(dummyFileNumber);
       insertCommitMessage(fakeRepo, fakeMessage);
     }
     fakeRepo.branchCreate().setName(DEVELOP).call();
     fakeRepo.checkout().setName(DEVELOP).call();
     for (int dummyFileNumber = 1; dummyFileNumber <= fakeCommitAmount; dummyFileNumber++) {
-      String fakeMessage = "[SC-001" + String.valueOf(dummyFileNumber) + "]release_2_commit_" + String.valueOf(dummyFileNumber);
+      String fakeMessage = "[SC-1001" + String.valueOf(dummyFileNumber) + "]release_2_commit_" + String.valueOf(dummyFileNumber);
       insertCommitMessage(fakeRepo, fakeMessage);
     }
   }

@@ -20,6 +20,18 @@ jar {
     }
 }
 
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'katalog',
+            	   'Implementation-Version': version,
+                   'Main-Class': mainClassName
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+exclude 'META-INF/*.RSA', 'META-INF/*.SF','META-INF/*.DSA' 
+    with jar
+}
+
 repositories {
     maven {
         url 'https://maven.atlassian.com/content/repositories/atlassian-public/'
@@ -30,10 +42,8 @@ dependencies {
     compile group: 'org.mockito', name: 'mockito-all', version:'1.10.19'
     compile group: 'javax.mail', name: 'mail', version:'1.4'
     compile group: 'org.slf4j', name: 'slf4j-api', version:'1.7.5'
-    compile group: 'org.slf4j', name: 'slf4j-log4j12', version:'1.7.5'
+    compile group: 'org.slf4j', name: 'slf4j-simple', version:'1.7.5'
     compile group: 'org.eclipse.jgit', name: 'org.eclipse.jgit', version:'4.5.0.201609210915-r'
-    compile group: 'com.sun.jersey', name: 'jersey-client', version: '1.9.1'
-    compile group: 'com.google.guava', name: 'guava', version: '14.0-rc1'
     compile group: 'com.atlassian.jira', name: 'jira-rest-java-client-parent', version: '3.0.0'
     compile group: 'com.atlassian.jira', name: 'jira-rest-java-client-core', version: '3.0.0'
     compile group: 'com.atlassian.jira', name: 'jira-rest-java-client-api', version: '3.0.0'

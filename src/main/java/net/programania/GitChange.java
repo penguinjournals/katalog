@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 class GitChange{
 	private String uniqueIdentifier;
 	private String message;
-	private List<String> foundTickets = new ArrayList<String>();
+	public List<String> foundTickets = new ArrayList<String>();
 	
 	GitChange(String uniqueIdentifier, String message){
 		this.uniqueIdentifier = uniqueIdentifier;
@@ -30,7 +30,7 @@ class GitChange{
 		Matcher jiraTickets = pattern.matcher(message);
 		
 		while (jiraTickets.find()) {	
-			foundTickets.add(jiraTickets.group());
+			foundTickets.add(jiraTickets.group().replaceAll("\\[", "").replaceAll("\\]", ""));
 		}
 	}
 
