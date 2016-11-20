@@ -5,6 +5,11 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.api.errors.NoHeadException;
 import org.eclipse.jgit.errors.AmbiguousObjectException;
@@ -14,9 +19,11 @@ import org.eclipse.jgit.errors.RevisionSyntaxException;
 
 
 public class Spike {
-	public static void main(String[] args) throws RevisionSyntaxException, NoHeadException, MissingObjectException, IncorrectObjectTypeException, AmbiguousObjectException, GitAPIException, IOException, URISyntaxException{
-		GitCrawler gitCrawler = new GitCrawler("/Users/david/Desktop/cocotero");
-		List<GitChange> changelogBetweenMasterAndDevelop = gitCrawler.changelogBetweenTwoBranches("master","develop");
+	public static void main(String[] args) throws RevisionSyntaxException, NoHeadException, MissingObjectException, IncorrectObjectTypeException, AmbiguousObjectException, GitAPIException, IOException, URISyntaxException, ParseException{
+		ArgumentParser argumentParser = new ArgumentParser(args);
+		InputParameters input = argumentParser.inputParameters();
+		GitCrawler gitCrawler = new GitCrawler(input.repoPath());
+		List<GitChange> changelogBetweenMasterAndDevelop = gitCrawler.changelogBetweenTwoBranches(input.masterBranch(),input.releaseBranch());
 		List<FullCommitInfo> fullCommitInfoChangelog = changelogWithJiraTaskDescription(changelogBetweenMasterAndDevelop);
         printChangelogToStdout(fullCommitInfoChangelog);
         System.exit(0);

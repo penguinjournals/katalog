@@ -16,7 +16,7 @@ import org.junit.Test;
 public class SpikeTest {
 
 	@Test
-	public void test() throws RevisionSyntaxException, NoHeadException, MissingObjectException, IncorrectObjectTypeException, AmbiguousObjectException, GitAPIException, IOException, URISyntaxException {
+	public void testSpike(){
 		Spike spike = new Spike();
 		assertTrue(true);
 	}
