@@ -35,7 +35,7 @@ public class Spike {
 
 	private static void printChangelogToStdout(List<FullCommitInfo> fullCommitInfoChangelog) {
 		for (FullCommitInfo fullCommitInfo : fullCommitInfoChangelog) {
-			System.out.println(fullCommitInfo.jiraTicketNumber+" "+fullCommitInfo.hash+" "+fullCommitInfo.jiraTicketSummary);
+			System.out.println(fullCommitInfo.printableTicketNumber()+" "+fullCommitInfo.printableCommitID()+" "+fullCommitInfo.printableTicketSummary());
 		}
 	}
 }
